@@ -1,1 +1,3 @@
 # Barter
+コマンド  
+/barter

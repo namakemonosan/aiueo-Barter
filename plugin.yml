@@ -1,0 +1,12 @@
+---
+name: Barter
+main: aieuo\barter\Main
+version: 0.1
+api: 3.0.0
+author: aieuo
+commands:
+ barter:
+  description: 物々交換
+  usage: /barter
+  permission: true
+...

@@ -196,11 +196,11 @@ class Main extends PluginBase implements Listener {
             $errorPlaces[] = 3;
         }
         if ((int)$data[2] <= 0) {
-            $errors[1] = "§c個数は1以上で入力してください§f";
+            $errors[1] = "§c個数は1以上の半角数字で入力してください§f";
             $errorPlaces[] = 2;
         }
         if ((int)$data[4] <= 0) {
-            $errors[1] = "§c個数は1以上で入力してください§f";
+            $errors[1] = "§c個数は1以上の半角数字で入力してください§f";
             $errorPlaces[] = 4;
         }
         if (!empty($errors)) {
@@ -465,11 +465,11 @@ class Main extends PluginBase implements Listener {
         $errors = [];
         $errorPlaces = [];
         if ((int)$data[1] <= 0) {
-            $errors[0] = "§c個数は1以上で入力してください§f";
+            $errors[0] = "§c個数は1以上の半角数字で入力してください§f";
             $errorPlaces[] = 1;
         }
         if ((int)$data[2] <= 0) {
-            $errors[0] = "§c個数は1以上で入力してください§f";
+            $errors[0] = "§c個数は1以上の半角数字で入力してください§f";
             $errorPlaces[] = 2;
         }
         if (empty($errors)) {

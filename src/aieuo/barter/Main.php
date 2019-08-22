@@ -55,10 +55,16 @@ class Main extends PluginBase implements Listener {
         return true;
     }
 
-    public function onMenu($player, $data, $message = "§7色々記入してください§f", $default = [], $errorPlaces = []) {
+    public function onMenu($player, $data, $message = null, $default = [], $errorPlaces = []) {
         if ($data === null) return;
+        $message = $message ?? "§7交換したいアイテムを手に持って開くとIDが表示されます§f";
         switch ($data) {
             case 0:
+                $hand = $player->getInventory()->getItemInHand();
+                $handID = $hand->getId().":".$hand->getDamage();
+                $itemCount = array_sum(array_map(function ($item) {
+                    return $item->getCount();
+                }, $player->getInventory()->all($hand)));
                 $form = [
                     "type" => "custom_form",
                     "title" => "募集",
@@ -69,24 +75,26 @@ class Main extends PluginBase implements Listener {
                         ],
                         [
                             "type" => "input",
-                            "text" => (in_array(1, $errorPlaces) ? "§e" : "")."交換するアイテムID§f",
+                            "text" => (in_array(1, $errorPlaces) ? "§e" : "")."交換するアイテムIDか名前§f",
+                            "placeholder" => $hand->getId() !== 0 ? "手) {$handID}" : "例) 1:0",
                             "default" => $default[1] ?? "",
                         ],
                         [
                             "type" => "input",
-                            "text" => (in_array(2, $errorPlaces) ? "§e" : "")."交換するアイテム数§f",
-                            "placeholder" => "1以上の数字で",
+                            "text" => (in_array(2, $errorPlaces) ? "§e" : "")."交換するアイテム数 (1以上の数字で)§f",
+                            "placeholder" => $itemCount > 0 ? "所持数) {$itemCount}" : "例) 64",
                             "default" => $default[2] ?? "",
                         ],
                         [
                             "type" => "input",
-                            "text" => (in_array(3, $errorPlaces) ? "§e" : "")."ほしいアイテムID§f",
+                            "text" => (in_array(3, $errorPlaces) ? "§e" : "")."ほしいアイテムIDか名前§f",
+                            "placeholder" => "例) grass",
                             "default" => $default[3] ?? "",
                         ],
                         [
                             "type" => "input",
-                            "text" => (in_array(4, $errorPlaces) ? "§e" : "")."ほしいアイテム数§f",
-                            "placeholder" => "1以上の数字で",
+                            "text" => (in_array(4, $errorPlaces) ? "§e" : "")."ほしいアイテム数 (1以上の数字で)§f",
+                            "placeholder" => "例) 64",
                             "default" => $default[4] ?? "",
                         ],
                         [
